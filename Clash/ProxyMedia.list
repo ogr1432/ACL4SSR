@@ -74,6 +74,10 @@ DOMAIN-SUFFIX,bbci.co
 DOMAIN-SUFFIX,bbci.co.uk
 DOMAIN-SUFFIX,bidi.net.uk
 
+# Bloomberg
+DOMAIN-SUFFIX,bloomberg.cn
+DOMAIN-SUFFIX,bloomberg.com
+
 # Bahamut
 USER-AGENT,Anime*
 DOMAIN,bahamut.akamaized.net
