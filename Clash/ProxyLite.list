@@ -57,7 +57,6 @@ DOMAIN-KEYWORD,spotify
 DOMAIN-KEYWORD,telegram
 DOMAIN-KEYWORD,twitter
 DOMAIN-KEYWORD,whatsapp
-DOMAIN-KEYWORD,wsj
 
 # Top Blocked Sites
 DOMAIN-SUFFIX,4sqi.net
