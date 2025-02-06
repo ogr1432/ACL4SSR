@@ -5,7 +5,6 @@ DOMAIN-SUFFIX,1password.com
 DOMAIN-SUFFIX,adguard.org
 DOMAIN-SUFFIX,bit.no.com
 DOMAIN-SUFFIX,btlibrary.me
-DOMAIN-SUFFIX,chatgpt.com
 DOMAIN-SUFFIX,cloudcone.com
 DOMAIN-SUFFIX,dubox.com
 DOMAIN-SUFFIX,gameloft.com
@@ -16,6 +15,7 @@ DOMAIN-SUFFIX,investing.com
 DOMAIN-SUFFIX,linkedin.com
 DOMAIN-SUFFIX,myteamspeak.com
 DOMAIN-SUFFIX,notion.so
+DOMAIN-SUFFIX,openai.chatgpt
 DOMAIN-SUFFIX,ping.pe
 DOMAIN-SUFFIX,redd.it
 DOMAIN-SUFFIX,reddit.com
