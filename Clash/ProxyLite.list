@@ -329,6 +329,7 @@ DOMAIN-SUFFIX,instagram.com
 DOMAIN-SUFFIX,instagr.am
 
 # Ipinfo
+DOMAIN-SUFFIX,api.ip.co
 DOMAIN-SUFFIX,api.ip.sb
 DOMAIN-SUFFIX,ipinfo.io
 DOMAIN-SUFFIX,ipwho.is
