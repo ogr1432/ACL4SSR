@@ -33,6 +33,9 @@ DOMAIN-SUFFIX,tradingview.com
 DOMAIN-SUFFIX,tradingview.io
 DOMAIN-SUFFIX,tvcdn.com
 DOMAIN-KEYWORD,tradingview
+DOMAIN-KEYWORD,tvc,PROXY
+DOMAIN-KEYWORD,stream,PROXY
+DOMAIN-KEYWORD,chart,PROXY
 DOMAIN-SUFFIX,tumbex.com
 DOMAIN-SUFFIX,twdvd.com
 DOMAIN-SUFFIX,unsplash.com
