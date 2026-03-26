@@ -24,6 +24,7 @@ IP-CIDR6,fe80::/10,no-resolve
 IP-CIDR6,fd00::/8,no-resolve
 
 # Router managed 路由器管理域名
+DOMAIN,cn.investing.com
 DOMAIN,instant.arubanetworks.com
 DOMAIN,setmeup.arubanetworks.com
 DOMAIN,router.asus.com
@@ -43,5 +44,3 @@ DOMAIN-SUFFIX,tplogin.cn
 DOMAIN-SUFFIX,windy.com
 DOMAIN-SUFFIX,wifi.cmcc
 
-# Investing 中国域名
-DOMAIN,cn.investing.com
