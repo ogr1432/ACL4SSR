@@ -42,3 +42,6 @@ DOMAIN-SUFFIX,zte.home
 DOMAIN-SUFFIX,tplogin.cn
 DOMAIN-SUFFIX,windy.com
 DOMAIN-SUFFIX,wifi.cmcc
+
+# Investing 中国域名
+DOMAIN,cn.investing.com
