@@ -339,13 +339,6 @@ DOMAIN-SUFFIX,cdninstagram.com
 DOMAIN-SUFFIX,instagram.com
 DOMAIN-SUFFIX,instagr.am
 
-# Investing
-DOMAIN-SUFFIX,tvc4.investing.com
-DOMAIN-SUFFIX,data.investing.com
-DOMAIN-SUFFIX,streamjs.investing.com
-DOMAIN-SUFFIX,investing.com
-
-
 # Ipinfo
 DOMAIN-SUFFIX,api.ip.co
 DOMAIN-SUFFIX,api.ip.sb
