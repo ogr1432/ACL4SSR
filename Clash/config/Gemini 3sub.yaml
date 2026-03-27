@@ -1,4 +1,6 @@
+# ==========================================
 # 基础配置
+# ==========================================
 port: 7890
 socks-port: 7891
 allow-lan: true
@@ -6,10 +8,13 @@ mode: rule
 log-level: info
 external-controller: :9090
 
-# 核心：定义节点来源（Sub-Store）
+# ==========================================
+# 1. 核心：定义节点来源（Sub-Store）
+# ==========================================
 proxy-providers:
-  sub_store_nodes:          # 这里的名称必须和下面 use 里的对应
+  sub_store_nodes:
     type: http
+    # 确保你的手机能访问到这个局域网 IP
     url: "http://192.168.1.100:3001/api/download/collection/3sub?target=clashmeta"
     interval: 3600
     path: ./proxies/sub_store.yaml
@@ -18,34 +23,72 @@ proxy-providers:
       url: http://www.gstatic.com/generate_204
       interval: 300
 
-# 策略组逻辑（完全对应你的 .ini custom_proxy_group）
+# ==========================================
+# 2. 策略组逻辑（已加入 use 字段引用节点）
+# ==========================================
 proxy-groups:
   - name: 🚀 节点选择
     type: select
-    proxies: [DIRECT]
+    use:
+      - sub_store_nodes
+    proxies:
+      - DIRECT
+
   - name: 🌍 国外媒体
     type: select
-    proxies: [🚀 节点选择, 🎯 全球直连]
+    use:
+      - sub_store_nodes
+    proxies:
+      - 🚀 节点选择
+      - 🎯 全球直连
+
   - name: 📲 电报信息
     type: select
-    proxies: [🚀 节点选择, 🎯 全球直连]
+    use:
+      - sub_store_nodes
+    proxies:
+      - 🚀 节点选择
+      - 🎯 全球直连
+
   - name: 🌍 审计资讯
     type: select
-    proxies: [🚀 节点选择, 🎯 全球直连]
+    use:
+      - sub_store_nodes
+    proxies:
+      - 🚀 节点选择
+      - 🎯 全球直连
+
   - name: 🎯 全球直连
     type: select
-    proxies: [DIRECT, 🚀 节点选择]
+    use:
+      - sub_store_nodes
+    proxies:
+      - DIRECT
+      - 🚀 节点选择
+
   - name: 🛑 全球拦截
     type: select
-    proxies: [REJECT, DIRECT]
+    proxies:
+      - REJECT
+      - DIRECT
+
   - name: 🍃 应用净化
     type: select
-    proxies: [REJECT, DIRECT]
+    proxies:
+      - REJECT
+      - DIRECT
+
   - name: 🐟 漏网之鱼
     type: select
-    proxies: [🚀 节点选择, 🎯 全球直连]
+    use:
+      - sub_store_nodes
+    proxies:
+      - 🚀 节点选择
+      - 🎯 全球直连
 
-# 规则集定义（对应你所有的 ruleset 链接）
+# ==========================================
+# 3. 规则集定义
+# ==========================================
 rule-providers:
   lan:
     type: http
@@ -150,7 +193,9 @@ rule-providers:
     path: ./ruleset/banks_hk.yaml
     interval: 86400
 
-# 规则匹配顺序（严格按照你的 .ini 顺序排列）
+# ==========================================
+# 4. 规则匹配
+# ==========================================
 rules:
   - RULE-SET,lan,🎯 全球直连
   - RULE-SET,ban_ad,🛑 全球拦截
