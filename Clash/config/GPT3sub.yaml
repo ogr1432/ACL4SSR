@@ -12,7 +12,7 @@ type: http
 url: "http://192.168.1.100:3001/api/download/collection/3sub?target=ClashMeta"
 interval: 3600
 
-# ================= 分组（100%按 ini）=================
+# ================= 分组 =================
 
 proxy-groups:
 
@@ -66,88 +66,99 @@ proxy-groups:
   * 🚀 节点选择
   * 🎯 全球直连
 
-# ================= ruleset → 完整 list 映射 =================
+# ================= rule-providers（关键修复）=================
 
 rule-providers:
 
 LocalAreaNetwork:
 type: http
 behavior: classical
+format: text
 url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list
-path: ./ruleset/LocalAreaNetwork.yaml
+path: ./ruleset/LocalAreaNetwork.list
 interval: 86400
 
 BanAD:
 type: http
 behavior: classical
+format: text
 url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list
-path: ./ruleset/BanAD.yaml
+path: ./ruleset/BanAD.list
 interval: 86400
 
 BanProgramAD:
 type: http
 behavior: classical
+format: text
 url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list
-path: ./ruleset/BanProgramAD.yaml
+path: ./ruleset/BanProgramAD.list
 interval: 86400
 
 GoogleCN:
 type: http
 behavior: classical
+format: text
 url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/GoogleCN.list
-path: ./ruleset/GoogleCN.yaml
+path: ./ruleset/GoogleCN.list
 interval: 86400
 
 SteamCN:
 type: http
 behavior: classical
+format: text
 url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/SteamCN.list
-path: ./ruleset/SteamCN.yaml
+path: ./ruleset/SteamCN.list
 interval: 86400
 
 Telegram:
 type: http
 behavior: classical
+format: text
 url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Telegram.list
-path: ./ruleset/Telegram.yaml
+path: ./ruleset/Telegram.list
 interval: 86400
 
 ProxyMedia:
 type: http
 behavior: classical
+format: text
 url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list
-path: ./ruleset/ProxyMedia.yaml
+path: ./ruleset/ProxyMedia.list
 interval: 86400
 
 ProxyLite:
 type: http
 behavior: classical
+format: text
 url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyLite.list
-path: ./ruleset/ProxyLite.yaml
+path: ./ruleset/ProxyLite.list
 interval: 86400
 
 Apple:
 type: http
 behavior: classical
+format: text
 url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Apple.list
-path: ./ruleset/Apple.yaml
+path: ./ruleset/Apple.list
 interval: 86400
 
 ChinaDomain:
 type: http
 behavior: classical
+format: text
 url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaDomain.list
-path: ./ruleset/ChinaDomain.yaml
+path: ./ruleset/ChinaDomain.list
 interval: 86400
 
 ChinaCompanyIp:
 type: http
 behavior: classical
+format: text
 url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaCompanyIp.list
-path: ./ruleset/ChinaCompanyIp.yaml
+path: ./ruleset/ChinaCompanyIp.list
 interval: 86400
 
-# ================= 规则（逐条对应 ini）=================
+# ================= 规则 =================
 
 rules:
 
