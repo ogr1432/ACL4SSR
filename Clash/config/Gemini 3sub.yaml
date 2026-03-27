@@ -11,7 +11,7 @@ proxy-providers:
   sub_store_nodes:
     type: http
     # 替换为你的 Sub-Store 3合1 订阅地址，务必保留 &target=clash
-    url: "http://192.168.1.100:3001/api/download/collection/3sub?target=clash"
+    url: "http://192.168.1.100:3001/api/download/collection/3sub?target=ClashMeta"
     interval: 3600
     path: ./proxies/sub_store.yaml
     health-check:
