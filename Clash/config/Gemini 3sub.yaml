@@ -14,9 +14,8 @@ external-controller: :9090
 proxy-providers:
   sub_store_nodes:
     type: http
-    # 确保你的手机在更新时能访问到这个局域网 IP
     url: "http://192.168.1.100:3001/api/download/collection/3sub?target=clashmeta"
-    interval: 43200
+    interval: 3600
     path: ./proxies/sub_store.yaml
     health-check:
       enable: true
@@ -24,7 +23,7 @@ proxy-providers:
       interval: 300
 
 # ==========================================
-# 2. 策略组逻辑（图标与下方 rules 严格对齐）
+# 2. 策略组逻辑
 # ==========================================
 proxy-groups:
   - name: "🚀 节点选择"
@@ -135,4 +134,89 @@ rule-providers:
   bloomberg:
     type: http
     behavior: classical
-    url: "
+    url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/Bloomberg"
+    path: ./rule_provider/bloomberg.yaml
+    interval: 86400
+  proxy_lite:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/ProxyLite.list"
+    path: ./rule_provider/proxy_lite.yaml
+    interval: 86400
+  google_fcm:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/Ruleset/GoogleFCM.list"
+    path: ./rule_provider/google_fcm.yaml
+    interval: 86400
+  openai:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/refs/heads/master/Clash/Ruleset/OpenAi.list"
+    path: ./rule_provider/openai.yaml
+    interval: 86400
+  apple:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/Apple.list"
+    path: ./rule_provider/apple.yaml
+    interval: 86400
+  microsoft:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/Microsoft.list"
+    path: ./rule_provider/microsoft.yaml
+    interval: 86400
+  china_domain:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/ChinaDomain.list"
+    path: ./rule_provider/china_domain.yaml
+    interval: 86400
+  china_ip:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/ChinaCompanyIp.list"
+    path: ./rule_provider/china_ip.yaml
+    interval: 86400
+  nas:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/NAS.list"
+    path: ./rule_provider/nas.yaml
+    interval: 86400
+  banks_hk:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/refs/heads/master/Clash/BanksHongKong.list"
+    path: ./rule_provider/banks_hk.yaml
+    interval: 86400
+
+# ==========================================
+# 4. 规则匹配
+# ==========================================
+rules:
+  - DST-PORT,7895,REJECT
+  - DST-PORT,7892,REJECT
+  - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
+  
+  - "RULE-SET,lan,🎯 全球直连"
+  - "RULE-SET,ban_ad,🛑 全球拦截"
+  - "RULE-SET,ban_program,🍃 应用净化"
+  - "RULE-SET,google_cn,🎯 全球直连"
+  - "RULE-SET,steam_cn,🎯 全球直连"
+  - "RULE-SET,telegram,📲 电报信息"
+  - "RULE-SET,proxy_media,🌍 国外媒体"
+  - "RULE-SET,bloomberg,🌍 审计资讯"
+  - "RULE-SET,proxy_lite,🚀 节点选择"
+  - "RULE-SET,google_fcm,🚀 节点选择"
+  - "RULE-SET,openai,🚀 节点选择"
+  - "RULE-SET,apple,🎯 全球直连"
+  - "RULE-SET,microsoft,🎯 全球直连"
+  - "RULE-SET,china_domain,🎯 全球直连"
+  - "RULE-SET,china_ip,🎯 全球直连"
+  - "RULE-SET,nas,🎯 全球直连"
+  - "RULE-SET,banks_hk,🎯 全球直连"
+  
+  - "GEOIP,CN,🎯 全球直连"
+  - "MATCH,🐟 漏网之鱼"
