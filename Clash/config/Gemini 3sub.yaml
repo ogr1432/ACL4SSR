@@ -15,7 +15,7 @@ proxy-providers:
   sub_store_nodes:
     type: http
     url: "http://192.168.1.100:3001/api/download/collection/3sub?target=clashmeta"
-    interval: 3600
+    interval: 43200
     path: ./proxies/sub_store.yaml
     health-check:
       enable: true
