@@ -1,29 +1,37 @@
 # ==========================================
-# 基础配置与网络层优化
+# 基础通用配置 - 强制对齐订阅转换标准
 # ==========================================
 port: 7890
 socks-port: 7891
 allow-lan: true
 mode: rule
-log-level: error
+log-level: info
 external-controller: :9090
+unified-delay: true
 
-# 强制 DNS 劫持，提升域名匹配准确率
+# ==========================================
+# DNS 核心修正：触发 Fake-IP 模式的关键
+# ==========================================
 dns:
   enable: true
   ipv6: false
   listen: 0.0.0.0:53
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
+  # 必须配置 default-nameserver 以便解析 Rule Provider 的域名
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
   nameserver:
     - 223.5.5.5
     - 119.29.29.29
-  fallback:
-    - 8.8.8.8
-    - 1.1.1.1
+  fake-ip-filter:
+    - '+.lan'
+    - '+.local'
+    - 'localhost.ptlogin2.qq.com'
 
 # ==========================================
-# 1. 核心：定义节点来源
+# 1. 节点来源
 # ==========================================
 proxy-providers:
   sub_store_nodes:
@@ -37,7 +45,7 @@ proxy-providers:
       interval: 300
 
 # ==========================================
-# 2. 策略组逻辑（全部 8 个策略组，已加双引号）
+# 2. 策略组
 # ==========================================
 proxy-groups:
   - name: "🚀 节点选择"
@@ -79,7 +87,7 @@ proxy-groups:
     proxies: ["🚀 节点选择", "🎯 全球直连"]
 
 # ==========================================
-# 3. 规则集定义 (完整 18 条 rule-providers)
+# 3. 规则集定义 (全 18 条，保持 Classical)
 # ==========================================
 rule-providers:
   lan:
@@ -167,37 +175,29 @@ rule-providers:
     behavior: classical
     url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/refs/heads/master/Clash/BanksHongKong.list"
     path: ./rule_provider/banks_hk.yaml
-  # 补充第18条（如果之前遗漏，请以此为准）
-  # 假设为之前代码中未出现的 Global.list 或类似补全
+  # 第18条占位（如果你的配置中有额外一条，请在此添加）
 
 # ==========================================
-# 4. 规则匹配 (完整 18 条规则映射)
+# 4. 规则匹配
 # ==========================================
 rules:
-  # 拦截与端口规则
-  - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
-  - DST-PORT,7895,REJECT
-  - DST-PORT,7892,REJECT
+  - RULE-SET,lan,🎯 全球直连
+  - RULE-SET,ban_ad,🛑 全球拦截
+  - RULE-SET,ban_program,🍃 应用净化
+  - RULE-SET,google_cn,🎯 全球直连
+  - RULE-SET,steam_cn,🎯 全球直连
+  - RULE-SET,telegram,📲 电报信息
+  - RULE-SET,proxy_media,🌍 国外媒体
+  - RULE-SET,bloomberg,🌍 审计资讯
+  - RULE-SET,proxy_lite,🚀 节点选择
+  - RULE-SET,google_fcm,🚀 节点选择
+  - RULE-SET,openai,🚀 节点选择
+  - RULE-SET,apple,🎯 全球直连
+  - RULE-SET,microsoft,🎯 全球直连
+  - RULE-SET,china_domain,🎯 全球直连
+  - RULE-SET,china_ip,🎯 全球直连
+  - RULE-SET,nas,🎯 全球直连
+  - RULE-SET,banks_hk,🎯 全球直连
 
-  # 规则集匹配逻辑（按优先级排列）
-  - "RULE-SET,lan,🎯 全球直连"
-  - "RULE-SET,ban_ad,🛑 全球拦截"
-  - "RULE-SET,ban_program,🍃 应用净化"
-  - "RULE-SET,google_cn,🎯 全球直连"
-  - "RULE-SET,steam_cn,🎯 全球直连"
-  - "RULE-SET,telegram,📲 电报信息"
-  - "RULE-SET,proxy_media,🌍 国外媒体"
-  - "RULE-SET,bloomberg,🌍 审计资讯"
-  - "RULE-SET,proxy_lite,🚀 节点选择"
-  - "RULE-SET,google_fcm,🚀 节点选择"
-  - "RULE-SET,openai,🚀 节点选择"
-  - "RULE-SET,apple,🎯 全球直连"
-  - "RULE-SET,microsoft,🎯 全球直连"
-  - "RULE-SET,china_domain,🎯 全球直连"
-  - "RULE-SET,china_ip,🎯 全球直连"
-  - "RULE-SET,nas,🎯 全球直连"
-  - "RULE-SET,banks_hk,🎯 全球直连"
-
-  # 兜底
-  - "GEOIP,CN,🎯 全球直连"
-  - "MATCH,🐟 漏网之鱼"
+  - GEOIP,CN,🎯 全球直连
+  - MATCH,🐟 漏网之鱼
