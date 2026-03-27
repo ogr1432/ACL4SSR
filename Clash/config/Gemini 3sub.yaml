@@ -5,7 +5,7 @@ port: 7890
 socks-port: 7891
 allow-lan: true
 mode: rule
-log-level: info
+log-level: error # 改为 error 减少日志压力
 external-controller: :9090
 
 # ==========================================
@@ -14,7 +14,6 @@ external-controller: :9090
 proxy-providers:
   sub_store_nodes:
     type: http
-    # 确保你的手机能访问到这个局域网 IP
     url: "http://192.168.1.100:3001/api/download/collection/3sub?target=clashmeta"
     interval: 3600
     path: ./proxies/sub_store.yaml
@@ -24,195 +23,135 @@ proxy-providers:
       interval: 300
 
 # ==========================================
-# 2. 策略组逻辑（已加入 use 字段引用节点）
+# 2. 策略组逻辑（图标与下方 rules 严格一致）
 # ==========================================
 proxy-groups:
   - name: 🚀 节点选择
     type: select
-    use:
-      - sub_store_nodes
-    proxies:
-      - DIRECT
+    use: [sub_store_nodes]
+    proxies: [DIRECT]
 
   - name: 🌍 国外媒体
     type: select
-    use:
-      - sub_store_nodes
-    proxies:
-      - 🚀 节点选择
-      - 🎯 全球直连
+    use: [sub_store_nodes]
+    proxies: [🚀 节点选择, 🎯 全球直连]
 
   - name: 📲 电报信息
     type: select
-    use:
-      - sub_store_nodes
-    proxies:
-      - 🚀 节点选择
-      - 🎯 全球直连
+    use: [sub_store_nodes]
+    proxies: [🚀 节点选择, 🎯 全球直连]
 
   - name: 🌍 审计资讯
     type: select
-    use:
-      - sub_store_nodes
-    proxies:
-      - 🚀 节点选择
-      - 🎯 全球直连
+    use: [sub_store_nodes]
+    proxies: [🚀 节点选择, 🎯 全球直连]
 
   - name: 🎯 全球直连
     type: select
-    use:
-      - sub_store_nodes
-    proxies:
-      - DIRECT
-      - 🚀 节点选择
+    use: [sub_store_nodes]
+    proxies: [DIRECT, 🚀 节点选择]
 
   - name: 🛑 全球拦截
     type: select
-    proxies:
-      - REJECT
-      - DIRECT
+    proxies: [REJECT, DIRECT]
 
   - name: 🍃 应用净化
     type: select
-    proxies:
-      - REJECT
-      - DIRECT
+    proxies: [REJECT, DIRECT]
 
   - name: 🐟 漏网之鱼
     type: select
-    use:
-      - sub_store_nodes
-    proxies:
-      - 🚀 节点选择
-      - 🎯 全球直连
+    use: [sub_store_nodes]
+    proxies: [🚀 节点选择, 🎯 全球直连]
 
 # ==========================================
-# 3. 规则集定义
+# 3. 规则集定义（Rule Providers）
 # ==========================================
 rule-providers:
   lan:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/LocalAreaNetwork.list"
-    path: ./ruleset/lan.yaml
-    interval: 86400
+    path: ./rule_provider/lan.yaml
   ban_ad:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/BanAD.list"
-    path: ./ruleset/ban_ad.yaml
-    interval: 86400
+    path: ./rule_provider/ban_ad.yaml
   ban_program:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/BanProgramAD.list"
-    path: ./ruleset/ban_program.yaml
-    interval: 86400
+    path: ./rule_provider/ban_program.yaml
   google_cn:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/GoogleCN.list"
-    path: ./ruleset/google_cn.yaml
-    interval: 86400
-  steam_cn:
-    type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/Ruleset/SteamCN.list"
-    path: ./ruleset/steam_cn.yaml
-    interval: 86400
+    path: ./rule_provider/google_cn.yaml
   telegram:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/Telegram.list"
-    path: ./ruleset/telegram.yaml
-    interval: 86400
+    path: ./rule_provider/telegram.yaml
   proxy_media:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/ProxyMedia.list"
-    path: ./ruleset/proxy_media.yaml
-    interval: 86400
+    path: ./rule_provider/proxy_media.yaml
   bloomberg:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/Bloomberg"
-    path: ./ruleset/bloomberg.yaml
-    interval: 86400
+    path: ./rule_provider/bloomberg.yaml
   proxy_lite:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/ProxyLite.list"
-    path: ./ruleset/proxy_lite.yaml
-    interval: 86400
-  google_fcm:
-    type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/Ruleset/GoogleFCM.list"
-    path: ./ruleset/google_fcm.yaml
-    interval: 86400
+    path: ./rule_provider/proxy_lite.yaml
   openai:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/refs/heads/master/Clash/Ruleset/OpenAi.list"
-    path: ./ruleset/openai.yaml
-    interval: 86400
-  apple:
-    type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/Apple.list"
-    path: ./ruleset/apple.yaml
-    interval: 86400
-  microsoft:
-    type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/Microsoft.list"
-    path: ./ruleset/microsoft.yaml
-    interval: 86400
+    path: ./rule_provider/openai.yaml
   china_domain:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/ChinaDomain.list"
-    path: ./ruleset/china_domain.yaml
-    interval: 86400
-  china_ip:
-    type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/ChinaCompanyIp.list"
-    path: ./ruleset/china_ip.yaml
-    interval: 86400
+    path: ./rule_provider/china_domain.yaml
   nas:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/NAS.list"
-    path: ./ruleset/nas.yaml
-    interval: 86400
+    path: ./rule_provider/nas.yaml
   banks_hk:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/refs/heads/master/Clash/BanksHongKong.list"
-    path: ./ruleset/banks_hk.yaml
-    interval: 86400
+    path: ./rule_provider/banks_hk.yaml
 
 # ==========================================
-# 4. 规则匹配
+# 4. 规则匹配（已手动对齐图标，确保匹配生效）
 # ==========================================
 rules:
+  # 强制拦截特定端口和 IP
+  - DST-PORT,7895,REJECT
+  - DST-PORT,7892,REJECT
+  - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
+  
+  # 规则集匹配
   - RULE-SET,lan,🎯 全球直连
   - RULE-SET,ban_ad,🛑 全球拦截
   - RULE-SET,ban_program,🍃 应用净化
   - RULE-SET,google_cn,🎯 全球直连
-  - RULE-SET,steam_cn,🎯 全球直连
   - RULE-SET,telegram,📲 电报信息
   - RULE-SET,proxy_media,🌍 国外媒体
   - RULE-SET,bloomberg,🌍 审计资讯
   - RULE-SET,proxy_lite,🚀 节点选择
-  - RULE-SET,google_fcm,🚀 节点选择
   - RULE-SET,openai,🚀 节点选择
-  - RULE-SET,apple,🎯 全球直连
-  - RULE-SET,microsoft,🎯 全球直连
   - RULE-SET,china_domain,🎯 全球直连
-  - RULE-SET,china_ip,🎯 全球直连
   - RULE-SET,nas,🎯 全球直连
   - RULE-SET,banks_hk,🎯 全球直连
+  
+  # 兜底规则
   - GEOIP,CN,🎯 全球直连
   - MATCH,🐟 漏网之鱼
