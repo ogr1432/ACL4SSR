@@ -1,0 +1,178 @@
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: rule
+log-level: info
+
+# ================= 节点 =================
+
+proxy-providers:
+substore:
+type: http
+url: "http://192.168.1.100:3001/api/download/collection/3sub?target=ClashMeta"
+interval: 3600
+
+# ================= 分组（100%按 ini）=================
+
+proxy-groups:
+
+* name: 🚀 节点选择
+  type: select
+  use:
+
+  * substore
+    proxies:
+  * DIRECT
+
+* name: 🌍 国外媒体
+  type: select
+  proxies:
+
+  * 🚀 节点选择
+  * 🎯 全球直连
+
+* name: 📲 电报信息
+  type: select
+  proxies:
+
+  * 🚀 节点选择
+  * 🎯 全球直连
+
+* name: 🎯 全球直连
+  type: select
+  proxies:
+
+  * DIRECT
+  * 🚀 节点选择
+
+* name: 🛑 全球拦截
+  type: select
+  proxies:
+
+  * REJECT
+  * DIRECT
+
+* name: 🍃 应用净化
+  type: select
+  proxies:
+
+  * REJECT
+  * DIRECT
+
+* name: 🐟 漏网之鱼
+  type: select
+  proxies:
+
+  * 🚀 节点选择
+  * 🎯 全球直连
+
+# ================= ruleset → 完整 list 映射 =================
+
+rule-providers:
+
+LocalAreaNetwork:
+type: http
+behavior: classical
+url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list
+path: ./ruleset/LocalAreaNetwork.yaml
+interval: 86400
+
+BanAD:
+type: http
+behavior: classical
+url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list
+path: ./ruleset/BanAD.yaml
+interval: 86400
+
+BanProgramAD:
+type: http
+behavior: classical
+url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list
+path: ./ruleset/BanProgramAD.yaml
+interval: 86400
+
+GoogleCN:
+type: http
+behavior: classical
+url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/GoogleCN.list
+path: ./ruleset/GoogleCN.yaml
+interval: 86400
+
+SteamCN:
+type: http
+behavior: classical
+url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/SteamCN.list
+path: ./ruleset/SteamCN.yaml
+interval: 86400
+
+Telegram:
+type: http
+behavior: classical
+url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Telegram.list
+path: ./ruleset/Telegram.yaml
+interval: 86400
+
+ProxyMedia:
+type: http
+behavior: classical
+url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list
+path: ./ruleset/ProxyMedia.yaml
+interval: 86400
+
+ProxyLite:
+type: http
+behavior: classical
+url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyLite.list
+path: ./ruleset/ProxyLite.yaml
+interval: 86400
+
+Apple:
+type: http
+behavior: classical
+url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Apple.list
+path: ./ruleset/Apple.yaml
+interval: 86400
+
+ChinaDomain:
+type: http
+behavior: classical
+url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaDomain.list
+path: ./ruleset/ChinaDomain.yaml
+interval: 86400
+
+ChinaCompanyIp:
+type: http
+behavior: classical
+url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaCompanyIp.list
+path: ./ruleset/ChinaCompanyIp.yaml
+interval: 86400
+
+# ================= 规则（逐条对应 ini）=================
+
+rules:
+
+* RULE-SET,LocalAreaNetwork,🎯 全球直连
+
+* RULE-SET,BanAD,🛑 全球拦截
+
+* RULE-SET,BanProgramAD,🍃 应用净化
+
+* RULE-SET,GoogleCN,🎯 全球直连
+
+* RULE-SET,SteamCN,🎯 全球直连
+
+* RULE-SET,Telegram,📲 电报信息
+
+* RULE-SET,ProxyMedia,🌍 国外媒体
+
+* RULE-SET,ProxyLite,🚀 节点选择
+
+* RULE-SET,Apple,🎯 全球直连
+
+* RULE-SET,ChinaDomain,🎯 全球直连
+
+* RULE-SET,ChinaCompanyIp,🎯 全球直连
+
+* GEOIP,CN,🎯 全球直连
+
+* MATCH,🐟 漏网之鱼
