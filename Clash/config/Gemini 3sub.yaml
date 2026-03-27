@@ -1,101 +1,164 @@
-# Sub-Store 脚本会自动填充 proxies 列表
+# 基础配置
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: rule
+log-level: info
+external-controller: :9090
+
+# Sub-Store 脚本会自动填充此处
 proxies: []
 
-# 策略组：对应你 .ini 中的 custom_proxy_group
+# 策略组逻辑（完全对应你的 .ini custom_proxy_group）
 proxy-groups:
   - name: 🚀 节点选择
     type: select
-    proxies:
-      - DIRECT
+    proxies: [DIRECT]
   - name: 🌍 国外媒体
     type: select
-    proxies:
-      - 🚀 节点选择
-      - DIRECT
+    proxies: [🚀 节点选择, 🎯 全球直连]
   - name: 📲 电报信息
     type: select
-    proxies:
-      - 🚀 节点选择
-      - DIRECT
+    proxies: [🚀 节点选择, 🎯 全球直连]
   - name: 🌍 审计资讯
     type: select
-    proxies:
-      - 🚀 节点选择
-      - DIRECT
+    proxies: [🚀 节点选择, 🎯 全球直连]
   - name: 🎯 全球直连
     type: select
-    proxies:
-      - DIRECT
-      - 🚀 节点选择
+    proxies: [DIRECT, 🚀 节点选择]
   - name: 🛑 全球拦截
     type: select
-    proxies:
-      - REJECT
-      - DIRECT
+    proxies: [REJECT, DIRECT]
   - name: 🍃 应用净化
     type: select
-    proxies:
-      - REJECT
-      - DIRECT
+    proxies: [REJECT, DIRECT]
   - name: 🐟 漏网之鱼
     type: select
-    proxies:
-      - 🚀 节点选择
-      - DIRECT
+    proxies: [🚀 节点选择, 🎯 全球直连]
 
-# 规则集：对应你 .ini 中的 ruleset，改为 rule-providers 模式
+# 规则集定义（对应你所有的 ruleset 链接）
 rule-providers:
-  LocalAreaNetwork:
+  lan:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/LocalAreaNetwork.list"
     path: ./ruleset/lan.yaml
     interval: 86400
-  BanAD:
+  ban_ad:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/BanAD.list"
-    path: ./ruleset/banad.yaml
+    path: ./ruleset/ban_ad.yaml
     interval: 86400
-  BanProgramAD:
+  ban_program:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/BanProgramAD.list"
-    path: ./ruleset/banprog.yaml
+    path: ./ruleset/ban_program.yaml
     interval: 86400
-  GoogleCN:
+  google_cn:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/GoogleCN.list"
-    path: ./ruleset/googlecn.yaml
+    path: ./ruleset/google_cn.yaml
     interval: 86400
-  Telegram:
+  steam_cn:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/Ruleset/SteamCN.list"
+    path: ./ruleset/steam_cn.yaml
+    interval: 86400
+  telegram:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/Telegram.list"
-    path: ./ruleset/tg.yaml
+    path: ./ruleset/telegram.yaml
     interval: 86400
-  ProxyMedia:
+  proxy_media:
     type: http
     behavior: classical
     url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/ProxyMedia.list"
-    path: ./ruleset/media.yaml
+    path: ./ruleset/proxy_media.yaml
     interval: 86400
-  # ... 其他 list 依此类推 ...
-  ChinaIP:
+  bloomberg:
     type: http
-    behavior: ipset
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/Bloomberg"
+    path: ./ruleset/bloomberg.yaml
+    interval: 86400
+  proxy_lite:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/ProxyLite.list"
+    path: ./ruleset/proxy_lite.yaml
+    interval: 86400
+  google_fcm:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/Ruleset/GoogleFCM.list"
+    path: ./ruleset/google_fcm.yaml
+    interval: 86400
+  openai:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/refs/heads/master/Clash/Ruleset/OpenAi.list"
+    path: ./ruleset/openai.yaml
+    interval: 86400
+  apple:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/Apple.list"
+    path: ./ruleset/apple.yaml
+    interval: 86400
+  microsoft:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/Microsoft.list"
+    path: ./ruleset/microsoft.yaml
+    interval: 86400
+  china_domain:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/ChinaDomain.list"
+    path: ./ruleset/china_domain.yaml
+    interval: 86400
+  china_ip:
+    type: http
+    behavior: classical
     url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/ChinaCompanyIp.list"
-    path: ./ruleset/chinaip.yaml
+    path: ./ruleset/china_ip.yaml
+    interval: 86400
+  nas:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/master/Clash/NAS.list"
+    path: ./ruleset/nas.yaml
+    interval: 86400
+  banks_hk:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ogr1432/ACL4SSR/refs/heads/master/Clash/BanksHongKong.list"
+    path: ./ruleset/banks_hk.yaml
     interval: 86400
 
-# 规则逻辑：对应 .ini 的分流顺序
+# 规则匹配顺序（严格按照你的 .ini 顺序排列）
 rules:
-  - RULE-SET,LocalAreaNetwork,🎯 全球直连
-  - RULE-SET,BanAD,🛑 全球拦截
-  - RULE-SET,BanProgramAD,🍃 应用净化
-  - RULE-SET,GoogleCN,🎯 全球直连
-  - RULE-SET,Telegram,📲 电报信息
-  - RULE-SET,ProxyMedia,🌍 国外媒体
+  - RULE-SET,lan,🎯 全球直连
+  - RULE-SET,ban_ad,🛑 全球拦截
+  - RULE-SET,ban_program,🍃 应用净化
+  - RULE-SET,google_cn,🎯 全球直连
+  - RULE-SET,steam_cn,🎯 全球直连
+  - RULE-SET,telegram,📲 电报信息
+  - RULE-SET,proxy_media,🌍 国外媒体
+  - RULE-SET,bloomberg,🌍 审计资讯
+  - RULE-SET,proxy_lite,🚀 节点选择
+  - RULE-SET,google_fcm,🚀 节点选择
+  - RULE-SET,openai,🚀 节点选择
+  - RULE-SET,apple,🎯 全球直连
+  - RULE-SET,microsoft,🎯 全球直连
+  - RULE-SET,china_domain,🎯 全球直连
+  - RULE-SET,china_ip,🎯 全球直连
+  - RULE-SET,nas,🎯 全球直连
+  - RULE-SET,banks_hk,🎯 全球直连
   - GEOIP,CN,🎯 全球直连
   - MATCH,🐟 漏网之鱼
