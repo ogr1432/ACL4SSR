@@ -8,16 +8,15 @@ external-controller: :9090
 
 # 核心：定义节点来源（Sub-Store）
 proxy-providers:
-  sub_store_nodes:
+  sub_store_nodes:          # 这里的名称必须和下面 use 里的对应
     type: http
-    # 替换为你的 Sub-Store 3合1 订阅地址，务必保留 &target=clash
-    url: "http://192.168.1.100:3001/api/download/collection/3sub?target=ClashMeta"
+    url: "http://192.168.1.100:3001/api/download/collection/3sub?target=clashmeta"
     interval: 3600
     path: ./proxies/sub_store.yaml
     health-check:
       enable: true
       url: http://www.gstatic.com/generate_204
-      interval: 300     
+      interval: 300
 
 # 策略组逻辑（完全对应你的 .ini custom_proxy_group）
 proxy-groups:
