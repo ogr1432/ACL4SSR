@@ -14,7 +14,7 @@ DOMAIN-SUFFIX,windy.com
 # 节点域名强制直连 (解决局域网手机测速 Timeout 问题)
 DOMAIN-SUFFIX,mojcn.com
 DOMAIN-SUFFIX,cnmjcn.cyou
-DOMAIN-SUFFIX,cnmjin111.net
+DOMAIN-SUFFIX,cnmjin.net
 
 # recaptcha
 DOMAIN,amcs-captcha-prod-us-east-1.s3.dualstack.us-east-1.amazonaws.com
