@@ -20,3 +20,4 @@ DOMAIN-SUFFIX,cnmjin.net
 DOMAIN,amcs-captcha-prod-us-east-1.s3.dualstack.us-east-1.amazonaws.com
 DOMAIN,us-east-1.threat-mitigation.aws.amazon.com
 DOMAIN,cdn.us-east-1.threat-mitigation.aws.amazon.com
+DOMAIN-SUFFIX,aws.amazon.com
