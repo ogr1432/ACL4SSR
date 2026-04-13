@@ -12,7 +12,6 @@ DOMAIN-SUFFIX,account.synology.com
 DOMAIN-SUFFIX,windy.com
 
 # 节点域名强制直连 (解决局域网手机测速 Timeout 问题)
-DOMAIN-SUFFIX,cnmjin.net
 DOMAIN-SUFFIX,mojcn.com
 DOMAIN-SUFFIX,cnmjcn.cyou
 
