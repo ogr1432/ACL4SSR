@@ -310,7 +310,8 @@ DOMAIN-SUFFIX,ydstatic.com
 DOMAIN-SUFFIX,youdao.com
 
 # Oracle中国
-DOMAIN-SUFFIX,oracle.com/cn
+DOMAIN-SUFFIX,oracle.com
+DOMAIN-SUFFIX,oraclecloud.com
 
 # PPTV、PPLive
 DOMAIN-SUFFIX,pplive.com
