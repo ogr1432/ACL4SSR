@@ -312,6 +312,7 @@ DOMAIN-SUFFIX,youdao.com
 # Oracle中国
 DOMAIN-SUFFIX,oracle.com
 DOMAIN-SUFFIX,oraclecloud.com
+DOMAIN-KEYWORD,oracle
 
 # PPTV、PPLive
 DOMAIN-SUFFIX,pplive.com
