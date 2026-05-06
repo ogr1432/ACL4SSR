@@ -1,5 +1,10 @@
 payload:
   # 代理列表
+  # mylist以上为自添加
+
+  # Revanced
+  - DOMAIN,api.revanced.app
+  - DOMAIN-SUFFIX,revanced.app
 
   # MyList && Other
   - DOMAIN-SUFFIX,1password.com
