@@ -1,11 +1,18 @@
 payload:
   # 代理列表
-  # mylist以上为自添加
-
+  
+  # mylist以上为自添加-----------------------------
+  
   # Revanced
   - DOMAIN,api.revanced.app
   - DOMAIN-SUFFIX,revanced.app
 
+  # hcaptcha验证相关
+  - DOMAIN-KEYWORD,hcaptcha
+  - DOMAIN-SUFFIX,challenges.cloudflare.com
+  
+  # mylist以上为自添加---------------------------------
+  
   # MyList && Other
   - DOMAIN-SUFFIX,1password.com
   - DOMAIN-SUFFIX,adguard.org
