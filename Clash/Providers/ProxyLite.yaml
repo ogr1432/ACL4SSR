@@ -10,6 +10,10 @@ payload:
   # hcaptcha验证相关
   - DOMAIN-KEYWORD,hcaptcha
   - DOMAIN-SUFFIX,challenges.cloudflare.com
+
+  # 域名注册
+  - DOMAIN-SUFFIX,query.domains
+  - DOMAIN-SUFFIX,tld-list.com
   
   # mylist以上为自添加---------------------------------
   
