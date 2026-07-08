@@ -15,4 +15,6 @@ payload:
   - DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
   - DOMAIN,robinfrontend-pa.googleapis.com
   - DOMAIN,signaler-pa.googleapis.com
+  - DOMAIN,subscriptionsfirstparty-pa.googleapis.com
+  - DOMAIN-SUFFIX,googleapis.com
   - DOMAIN-SUFFIX,apis.google.com
