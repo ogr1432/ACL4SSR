@@ -13,6 +13,6 @@ payload:
   - DOMAIN-SUFFIX,gemini.google.com
   - DOMAIN-SUFFIX,generativeai.google
   - DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
-  - DOMAIN-robinfrontend-pa.googleapis.com
-  - DOMAIN-signaler-pa.googleapis.com
+  - DOMAIN,robinfrontend-pa.googleapis.com
+  - DOMAIN,signaler-pa.googleapis.com
   - DOMAIN-SUFFIX,apis.google.com
