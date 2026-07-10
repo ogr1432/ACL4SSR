@@ -1,5 +1,5 @@
 
-# <<<<<< 覆盖更新前注意 ProxyLite.yaml 规则  >>>>>>
+# <<<<<< 覆盖更新前注意 Gemini.yaml  OpenAi.yaml 规则修改记录  >>>>>>
 
 
 
