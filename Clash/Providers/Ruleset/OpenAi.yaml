@@ -1,6 +1,7 @@
 payload:
   # 内容：OpenAi
   # 数量：16条
+  
   # App 内购买与订阅凭证验证服务，确认是否PLUS会员
   - DOMAIN-SUFFIX,revenuecat.com
 
