@@ -2,6 +2,8 @@ payload:
   # 内容：Gemini
   # 数量：13条
 
+  # === 1. 静态资源大包揽（用 SUFFIX 一劳永逸） ===
+  - DOMAIN-SUFFIX,gstatic.com
   # === Gemini 核心服务与官方域名 ===
   - DOMAIN-KEYWORD,gemini
   - DOMAIN-SUFFIX,gemini.google.com
