@@ -1,5 +1,11 @@
 payload:
   # 内容：GoogleCN
+
+  # 以下手动添加防Play商店卡等待中-----------------------------  
+  - DOMAIN-SUFFIX,googleapis.cn
+  - DOMAIN-SUFFIX,google.cn
+  # 以上手动添加-------------------------------------------------
+  
   # 数量：29条
   - DOMAIN-SUFFIX,265.com
   - DOMAIN-SUFFIX,2mdn.net
