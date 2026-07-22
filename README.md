@@ -1,5 +1,5 @@
 
-# <<<<<< 覆盖更新前注意 Gemini.yaml  OpenAi.yaml 规则修改记录  >>>>>>
+# <<<<<< 覆盖更新前注意 Gemini.yaml  OpenAi.yaml GoogleCN 规则修改记录  >>>>>>
 
 
 
