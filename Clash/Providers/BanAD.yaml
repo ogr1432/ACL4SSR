@@ -418,6 +418,13 @@ payload:
   - DOMAIN-SUFFIX,zzsx8.com
 
   # 广告联盟-国外****************
+  
+  # 解决 investing 弹关闭广告提示窗
+  - DOMAIN-SUFFIX,doubleverify.com
+  - DOMAIN-SUFFIX,moatads.com
+  - DOMAIN-SUFFIX,adsrvr.org
+  - DOMAIN-SUFFIX,amazon-adsystem.com
+  
   - DOMAIN-SUFFIX,acuityplatform.com
   - DOMAIN-SUFFIX,ad-stir.com
   - DOMAIN-SUFFIX,ad-survey.com
